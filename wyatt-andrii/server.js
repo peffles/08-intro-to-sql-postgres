@@ -95,7 +95,7 @@ app.put('/articles/:id', (request, response) => {
 
 app.delete('/articles/:id', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // PUT YOUR RESPONSE HERE
+  //  This code would be numbers 2-5 in the full-stack-diagram because we are making a request to the server which is to delete some data . This would be DELETE in CRUD. The method in article.js that is interacting with this code is deleteRecord.
   client.query(
     `DELETE FROM articles WHERE article_id=$1;`,
     [request.params.id]
@@ -110,7 +110,7 @@ app.delete('/articles/:id', (request, response) => {
 
 app.delete('/articles', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // PUT YOUR RESPONSE HERE
+  //  This code would be numbers 2-5 in the full-stack-diagram because we are making a request to the server which is to delete our data within articles. This would be Delete in CRUD. The method in article.js that is interacting with this code is truncateTable.
   client.query(
     'DELETE FROM articles;'
   )
@@ -123,7 +123,7 @@ app.delete('/articles', (request, response) => {
 });
 
 // COMMENT: What is this function invocation doing?
-// PUT YOUR RESPONSE HERE
+// It will check if in our database exist table "articles". If not it will create new table for that information.
 loadDB();
 
 app.listen(PORT, () => {
@@ -135,7 +135,8 @@ app.listen(PORT, () => {
 ////////////////////////////////////////
 function loadArticles() {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // PUT YOUR RESPONSE HERE
+  // This code would be numbers 3-4 in the full-stack-diagram because we are making a request to the server which will check our table if it hase some data. if not it will load our JSON and will create our articles on the server side. This would be create in CRUD. 
+  client.query(
   client.query('SELECT COUNT(*) FROM articles')
     .then(result => {
     // REVIEW: result.rows is an array of objects that PostgreSQL returns as a response to a query.
@@ -159,7 +160,8 @@ function loadArticles() {
 
 function loadDB() {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // 
+  // This code would be numbers 3-4 in the full-stack-diagram because we are making a request to the server to create new table. This would be CREATE in CRUD.
+  client.query(
   client.query(`
     CREATE TABLE IF NOT EXISTS articles (
       article_id SERIAL PRIMARY KEY,
